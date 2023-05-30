@@ -1,0 +1,117 @@
+.profile {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+}
+
+.profile__info {
+  display: grid;
+  grid-template-areas:
+    "title button"
+    "description description";
+  grid-template-columns: minmax(auto 272px) auto;
+}
+
+.profile__edit-button {
+  background: transparent url(../images/edit.svg) center no-repeat;
+  height: 24px;
+  width: 24px;
+  grid-area: button;
+  align-self: center;
+  border: 1px solid #ffffff;
+  margin: 0;
+  cursor: pointer;
+}
+
+.profile__edit-button:hover {
+  opacity: 60%;
+  transition: 0.1s;
+}
+
+.profile__plus-button {
+  background: transparent url(../images/plus.svg) center no-repeat;
+  width: 150px;
+  height: 50px;
+  margin-left: auto;
+  border: 2px solid #ffffff;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.profile__plus-button:hover {
+  opacity: 60%;
+  transition: 0.1s;
+}
+
+.profile__title {
+  font-size: 42px;
+  line-height: 48px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  grid-area: title;
+  margin: 0;
+  padding-right: 18px;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
+.profile__description {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  grid-area: description;
+  margin: 0;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
+.profile__image {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-position: center;
+  margin-right: 24px;
+}
+
+@media screen and (max-width: 1100px) {
+  .profile {
+    flex-direction: column;
+  }
+  .profile__info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+  .profile__title {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .profile__description {
+    width: 100%;
+    text-align: center;
+  }
+  .profile__plus-button {
+    margin: 0;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 836px) {
+  .profile__title {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 27px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 730px) {
+  .profile__plus-button {
+    padding: 0;
+    width: 100%;
+  }
+}
