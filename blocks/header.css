@@ -7,15 +7,6 @@
   justify-content: left;
 }
 
-.header__title {
-  font-family: "Inter", Arial, Helvetica, sans-serif;
-  position: absolute;
-  width: 173px;
-  height: 33px;
-  left: 200px;
-  top: 45px;
-}
-
 @media screen and (max-width: 880px) {
   .header {
     padding: 45px;
@@ -26,8 +17,5 @@
     padding-bottom: 32px;
     padding-left: 27px;
     padding-top: 28px;
-  }
-  .header__underline {
-    padding-right: 0;
   }
 }
