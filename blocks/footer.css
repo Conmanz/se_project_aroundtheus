@@ -21,6 +21,14 @@
     font-size: 14px;
     line-height: 17px;
     text-align: left;
-    padding-right: 19px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .footer {
+    margin: 0;
+  }
+  .footer__text {
+    padding: 0;
   }
 }

@@ -47,3 +47,9 @@
   opacity: 50%;
   transition: 0.1s;
 }
+
+@media screen and (max-width: 320px) {
+  .cards {
+    margin-top: 0;
+  }
+}
