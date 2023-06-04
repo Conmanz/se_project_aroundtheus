@@ -1,7 +1,7 @@
 .cards {
   display: flex;
   align-items: center;
-  padding-top: 47.25px;
+  padding-top: 36px;
 }
 
 .cards__list {

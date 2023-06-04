@@ -98,6 +98,10 @@
     margin: 0;
     width: 100%;
   }
+  .profile__image {
+    background-position: center;
+    margin: 0;
+  }
 }
 
 @media screen and (max-width: 880px) {
@@ -117,9 +121,9 @@
 
 @media screen and (max-width: 320px) {
   .profile__description {
-    font-weight: 500;
     line-height: 17px;
     font-size: 14px;
+    padding-top: 14px;
   }
   .profile__plus-button {
     margin: 0;

@@ -18,8 +18,8 @@
 
 @media screen and (max-width: 1100px) {
   .page__section {
-    margin: 0px 20px;
-    max-width: calc(100% - 40px);
+    margin: 0px;
+    max-width: calc(100%);
   }
 }
 
@@ -27,5 +27,6 @@
   .page__content {
     margin-left: 19px;
     margin-right: 19px;
+    max-width: calc(100%);
   }
 }

@@ -30,5 +30,6 @@
   }
   .footer__text {
     padding: 0;
+    font-size: 14px;
   }
 }

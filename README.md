@@ -5,6 +5,7 @@
 - Intro
 - Figma
 - Github
+- Github Pages
 - Techniques & Technologies
 
 **Intro**
@@ -18,6 +19,10 @@ This project is made so all the elements are displayed correctly on popular scre
 **Github**
 
 - [Link to the project on Github](https://github.com/Conmanz/se_project_aroundtheus)
+
+**Github Pages**
+
+- [Link to the project on Github Pages](https://conmanz.github.io/se_project_aroundtheus/)
 
 **Techniques & Technologies**
 
