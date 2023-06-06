@@ -21,6 +21,7 @@
   border: 1px solid #ffffff;
   margin: 0;
   cursor: pointer;
+  padding: 0;
 }
 
 .profile__edit-button:hover {
@@ -138,5 +139,9 @@
   }
   .profile__image {
     margin: 0;
+  }
+  .profile__edit-button {
+    height: 18px;
+    width: 18px;
   }
 }
