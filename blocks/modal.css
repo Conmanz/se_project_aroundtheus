@@ -45,7 +45,7 @@
 
 .modal__form {
   display: grid;
-  margin: 0 auto;
+  width: 100%;
   width: 358px;
 }
 
@@ -72,6 +72,7 @@
   padding-bottom: 10px;
   padding-top: 25px;
   box-sizing: border-box;
+  width: 420px;
 }
 
 .modal__button {
@@ -121,5 +122,25 @@
   .modal__button {
     margin-top: 45px;
     height: 46px;
+    width: 360px;
+  }
+
+  .modal__input {
+    width: 360px;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .modal__container {
+    padding: 25px 22px;
+    width: -webkit-fill-available;
+  }
+
+  .modal__input {
+    width: 240px;
+  }
+
+  .modal__button {
+    width: 240px;
   }
 }
