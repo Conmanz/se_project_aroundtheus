@@ -1,7 +1,6 @@
 .card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .card__image {
@@ -36,17 +35,72 @@
 }
 
 .card__like-button {
-  background: transparent url(../images/heart.svg) center no-repeat;
+  background: url(../images/heart.svg) center no-repeat;
   min-width: 27px;
   height: 23px;
   border: 0;
   cursor: pointer;
 }
 
+.card__liked-heart {
+  background: url(../images/Heart-Fill.svg) center no-repeat;
+}
+
 .card__like-button:hover {
   opacity: 50%;
   transition: 0.1s;
 }
+
+.card__delete-button {
+  background: url(../images/Trash.svg) center no-repeat;
+  width: 18px;
+  height: 19px;
+  position: absolute;
+  border-style: none;
+  align-self: flex-end;
+  justify-self: flex-start;
+  margin-right: 15px;
+  margin-top: 18px;
+  cursor: pointer;
+}
+
+.card__delete-button:hover {
+  opacity: 50%;
+}
+
+.big-picture-modal {
+  /* top: 40px; */
+  /* left: 20px; */
+  /* bottom: 0; */
+  /* right: 40px; */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  /* padding-right: 19px; */
+  /* padding-left: 19px; */
+  visibility: hidden;
+  opacity: 0%;
+  position: fixed;
+}
+
+.big-picture-modal-visible {
+  visibility: visible;
+  opacity: 100%;
+  display: flex;
+  flex: 0 1 25%;
+}
+
+.big-picture-img {
+  max-width: 75vh;
+  max-height: 75vh;
+}
+
+.big-picture__container {
+  display: flex;
+  flex: 0 1 25%;
+}
+/* .big-picture__footer {
+  po
+} */
 
 @media screen and (max-width: 320px) {
   .cards {
