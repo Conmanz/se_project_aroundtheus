@@ -80,13 +80,9 @@
   left: 20px;
   bottom: 0;
   right: 40px;
-}
-
-.big-picture-modal-visible {
-  visibility: visible;
-  opacity: 100%;
-  display: flex;
-  flex: 0 1 25%;
+  transition: opacity linear 0.3s 0.2s;
+  justify-content: center;
+  align-items: center;
 }
 
 .big-picture-img {

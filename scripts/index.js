@@ -45,7 +45,9 @@ const cardAddCloseButton = cardAddModal.querySelector(".modal__close");
 const addCardImageURL = document.querySelector("#card-description-input");
 const addCardTitleInput = document.querySelector("#card-title-input");
 const cardAddForm = cardAddModal.querySelector(".modal__form");
-const bigPictureCloseButton = document.querySelector("#add-modal__close");
+const bigPictureCloseButton = document.querySelector(
+  "#big-picture-modal__close"
+);
 const bigPictureModal = document.querySelector(".big-picture-modal");
 const bigPictureFooter = document.querySelector(".big-picture__footer");
 
@@ -88,7 +90,10 @@ function getCardElement(cardData) {
 
   bigPictureFooter.textContent = cardData.name;
   cardImageEl.addEventListener("click", () => {
-    bigPictureModal.classList.add("modal_opened");
+    bigPictureImg.src = cardData.link;
+    bigPictureImg.alt = cardData.name;
+    bigPictureFooter.textContent = cardData.name;
+    openModal(bigPictureModal);
   });
 
   return cardElement;
@@ -142,6 +147,7 @@ initialCards.forEach((cardData) => {
   cardListEL.append(cardElement);
 });
 
-bigPictureCloseButton.addEventListener("click", () => {
+bigPictureCloseButton.addEventListener("click", (e) => {
+  e.preventDefault;
   closeModal(bigPictureModal);
 });

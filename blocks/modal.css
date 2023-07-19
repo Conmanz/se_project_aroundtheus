@@ -108,6 +108,11 @@
   cursor: pointer;
 }
 
+#big-picture-modal__close {
+  position: relative;
+  top: -30px;
+}
+
 @media screen and (max-width: 625px) {
   .modal__container {
     width: 282px;
