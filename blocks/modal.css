@@ -1,10 +1,4 @@
 .modal {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 0 19px;
   color: black;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
@@ -12,6 +6,12 @@
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s linear 0.3s, opacity 0.3s linear;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0 19px;
 }
 
 .modal_opened {
@@ -115,11 +115,10 @@
   }
 
   .modal__close {
-    width: 18px;
-    height: 18px;
     bottom: calc(100% + 20px);
     left: calc(100% - 20px);
-    /* transform: rotate(45deg); */
+    width: 18px;
+    height: 18px;
   }
 
   .modal__heading {
