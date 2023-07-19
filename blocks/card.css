@@ -68,7 +68,7 @@
   opacity: 60%;
 }
 
-.modal__big-picture-modal {
+.modal__big_picture_modal {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
   padding-right: 19px;
@@ -90,11 +90,11 @@
   max-height: 75vh;
 }
 
-.modal__big-picture__container {
+.modal__big__picture_container {
   display: flex;
   flex: 0 1 25%;
 }
-.modal__big-picture__footer {
+.modal__big-picture_footer {
   font-family: "Inter", sans-serif;
   font-size: 12px;
   font-weight: 400;

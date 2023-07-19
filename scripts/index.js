@@ -48,8 +48,8 @@ const cardAddForm = cardAddModal.querySelector(".modal__form");
 const bigPictureCloseButton = document.querySelector(
   "#big-picture-modal__close"
 );
-const bigPictureModal = document.querySelector(".modal__big-picture-modal");
-const bigPictureFooter = document.querySelector(".modal__big-picture__footer");
+const bigPictureModal = document.querySelector(".modal__big_picture_modal");
+const bigPictureFooter = document.querySelector(".modal__big-picture_footer");
 
 //Fuctions
 function openModal(modal) {
