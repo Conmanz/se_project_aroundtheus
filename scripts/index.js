@@ -25,16 +25,6 @@ const initialCards = [
   },
 ];
 
-// const temp = {
-//   name: "Lago di Braies",
-//   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-//   hi: {
-//     someFunc: () => {}
-//   }
-// };
-
-// temp.hi.someFunc()
-
 //Elements
 const profileEditButton = document.querySelector("#profile__edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
@@ -98,7 +88,6 @@ function getCardElement(cardData) {
 
   bigPictureFooter.textContent = cardData.name;
   cardImageEl.addEventListener("click", () => {
-    console.log("clicked");
     bigPictureModal.classList.add("big-picture-modal-visible");
   });
   return cardElement;

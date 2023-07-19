@@ -1,44 +1,46 @@
 .card {
+  list-style-type: none;
+  background-color: #fff;
+  color: #000;
+  width: 282px;
+  border-radius: 3%;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .card__image {
   width: 282px;
   height: 282px;
-  border-radius: 10px 10px 0px 0px;
+  border-top-left-radius: 3%;
+  border-top-right-radius: 3%;
 }
 
 .card__description {
   display: flex;
-  background-color: white;
-  color: black;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  padding-left: 20px;
-  padding-right: 20px;
-  align-items: center;
   justify-content: space-between;
-  border-radius: 0px 0px 10px 10px;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 29px;
+  padding: 25px 20px;
 }
 
 .card__label-title {
-  color: black;
   margin: 0;
-  font-size: 24px;
-  line-height: 29px;
-  font-weight: 900;
+  text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-  font-family: "Inter", Arial, Helvetica, sans-serif;
+  max-width: 219px;
 }
 
 .card__like-button {
   background: url(../images/heart.svg) center no-repeat;
-  min-width: 27px;
-  height: 23px;
-  border: 0;
+  background: transparent center no-repeat;
+  width: 21px;
+  height: 18px;
+  border-style: none;
   cursor: pointer;
 }
 
@@ -48,38 +50,36 @@
 
 .card__like-button:hover {
   opacity: 50%;
-  transition: 0.1s;
 }
 
 .card__delete-button {
-  background: url(../images/Trash.svg) center no-repeat;
+  background: transparent center no-repeat;
+  background-image: url(../images/Trash.svg);
   width: 18px;
   height: 19px;
   position: absolute;
+  top: 20px;
+  right: 15px;
   border-style: none;
-  align-self: flex-end;
-  justify-self: flex-start;
-  margin-right: 15px;
-  margin-top: 18px;
   cursor: pointer;
 }
 
 .card__delete-button:hover {
-  opacity: 50%;
+  opacity: 60%;
 }
 
 .big-picture-modal {
-  /* top: 40px; */
-  /* left: 20px; */
-  /* bottom: 0; */
-  /* right: 40px; */
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
-  /* padding-right: 19px; */
-  /* padding-left: 19px; */
+  padding-right: 19px;
+  padding-left: 19px;
   visibility: hidden;
   opacity: 0%;
   position: fixed;
+  top: 40px;
+  left: 20px;
+  bottom: 0;
+  right: 40px;
 }
 
 .big-picture-modal-visible {
