@@ -94,7 +94,7 @@
   display: flex;
   flex: 0 1 25%;
 }
-.modal__big-picture_footer {
+.modal__image_footer {
   font-family: "Inter", sans-serif;
   font-size: 12px;
   font-weight: 400;

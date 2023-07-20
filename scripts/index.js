@@ -49,7 +49,7 @@ const bigPictureCloseButton = document.querySelector(
   "#big-picture-modal__close"
 );
 const bigPictureModal = document.querySelector("#image-modal");
-const bigPictureFooter = document.querySelector(".modal__big-picture_footer");
+const bigPictureFooter = document.querySelector(".modal__image_footer");
 
 //Fuctions
 function openModal(modal) {
