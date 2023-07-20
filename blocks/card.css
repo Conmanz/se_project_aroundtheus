@@ -90,7 +90,7 @@
   max-height: 75vh;
 }
 
-.modal__container_container_image {
+.modal__container_image {
   display: flex;
   flex: 0 1 25%;
 }
