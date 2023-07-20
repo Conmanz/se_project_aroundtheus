@@ -14,6 +14,7 @@
   height: 282px;
   border-top-left-radius: 3%;
   border-top-right-radius: 3%;
+  cursor: pointer;
 }
 
 .card__description {
@@ -37,7 +38,6 @@
 
 .card__like-button {
   background: url(../images/heart.svg) center no-repeat;
-  background: transparent center no-repeat;
   width: 21px;
   height: 18px;
   border-style: none;
@@ -66,46 +66,6 @@
 
 .card__delete-button:hover {
   opacity: 60%;
-}
-
-.modal__big_picture_modal {
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  padding-right: 19px;
-  padding-left: 19px;
-  visibility: hidden;
-  opacity: 0%;
-  position: fixed;
-  top: 40px;
-  left: 20px;
-  bottom: 0;
-  right: 40px;
-  transition: opacity linear 0.3s 0.2s;
-  justify-content: center;
-  align-items: center;
-}
-
-#image-modal {
-  max-width: 75vh;
-  max-height: 75vh;
-}
-
-#modal__container_image {
-  display: flex;
-  flex: 0 1 25%;
-}
-.modal__image_footer {
-  font-family: "Inter", sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 15px;
-  letter-spacing: 0em;
-  text-align: left;
-  position: absolute;
-  margin: 0;
-  color: #fff;
-  bottom: 300px;
-  left: 577px;
 }
 
 @media screen and (max-width: 320px) {
