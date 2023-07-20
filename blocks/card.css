@@ -85,12 +85,12 @@
   align-items: center;
 }
 
-.big-picture-img {
+#image-modal {
   max-width: 75vh;
   max-height: 75vh;
 }
 
-.modal__big__picture_container {
+.modal__container_container_image {
   display: flex;
   flex: 0 1 25%;
 }
