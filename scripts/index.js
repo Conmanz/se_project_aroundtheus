@@ -148,6 +148,5 @@ initialCards.forEach((cardData) => {
 });
 
 bigPictureCloseButton.addEventListener("click", (e) => {
-  e.preventDefault;
   closeModal(bigPictureModal);
 });
