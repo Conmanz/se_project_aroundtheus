@@ -26,7 +26,6 @@
 
 .modal__container {
   background-color: #fff;
-  margin: auto;
   border-radius: 10px;
   padding: 36px;
   position: relative;
@@ -138,14 +137,32 @@
   color: #fff;
   border: none;
   border-radius: 2px;
-  margin-top: 48px;
+  margin-top: 15px;
   cursor: pointer;
+}
+
+.modal__button_disabled {
+  background-color: transparent;
+  color: #5e5e5e;
+  border: 1px solid #5e5e5e;
 }
 
 .modal__button:hover {
   opacity: 0.8;
   transition: opacity 0.5s ease;
   cursor: pointer;
+}
+
+.modal__error {
+  font-size: 12px;
+  line-height: 15px;
+  color: #ff0000;
+  transition: opacity 0.3s;
+  height: 1em;
+}
+
+.modal__input_type_error {
+  border-bottom: 1px solid #ff0000;
 }
 
 .big-picture-img {

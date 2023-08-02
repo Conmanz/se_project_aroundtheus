@@ -54,10 +54,24 @@ const bigPictureFooter = document.querySelector(".modal__image_footer");
 //Fuctions
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  const modalContainer = modal.querySelector("div.modal > div");
+  modalContainer.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  });
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  const modalContainer = modal.querySelector("div.modal > div");
+  modalContainer.removeEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+}
+
+function isModalOpen(modal) {
+  return modal.classList.contains("modal_opened");
 }
 
 function getCardElement(cardData) {
@@ -149,4 +163,33 @@ initialCards.forEach((cardData) => {
 
 bigPictureCloseButton.addEventListener("click", (e) => {
   closeModal(bigPictureModal);
+});
+
+profileEditModal.addEventListener("click", (e) => {
+  e.preventDefault();
+  closeModal(profileEditModal);
+});
+
+cardAddModal.addEventListener("click", (e) => {
+  closeModal(cardAddModal);
+});
+
+bigPictureModal.addEventListener("click", (e) => {
+  closeModal(bigPictureModal);
+});
+
+document.addEventListener("keydown", ({ key }) => {
+  if (key === "Escape") {
+    if (isModalOpen(profileEditModal)) {
+      closeModal(profileEditModal);
+    }
+
+    if (isModalOpen(cardAddModal)) {
+      closeModal(cardAddModal);
+    }
+
+    if (isModalOpen(bigPictureModal)) {
+      closeModal(bigPictureModal);
+    }
+  }
 });
