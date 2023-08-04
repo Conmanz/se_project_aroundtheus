@@ -46,11 +46,6 @@ function setEventListeners(formEl, options) {
       toggleButtonState(inputEls, submitButton, options);
     });
   });
-  //I have to keep this because the submit button doesn't work without it.
-  //I tried it without the listener and it didn't work
-  submitButton.addEventListener("click", (e) => {
-    formEl.dispatchEvent(new Event("submit"));
-  });
 }
 
 function enableValidation(options) {
