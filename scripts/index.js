@@ -169,25 +169,35 @@ bigPictureCloseButton.addEventListener("click", (e) => {
   closeModal(bigPictureModal);
 });
 
-function openModal(modal) {
-  modal.classList.add("modal_opened");
-  document.addEventListener("keyup", handleEscape);
+function closeModalOnRemoteClick(evt) {
+  //target is the element on which the event happened
+  //currentTarget is the modal
+  //if they are the same then we should close the modal
+  profileEditModal.addEventListener("mousedown", (e) => {
+    if (e.target.classList.contains("modal")) {
+      closeModal(profileEditModal);
+    }
+  });
+
+  cardAddModal.addEventListener("mousedown", (e) => {
+    if (e.target.classList.contains("modal")) {
+      closeModal(cardAddModal);
+    }
+  });
+
+  bigPictureModal.addEventListener("mousedown", (e) => {
+    if (e.target.classList.contains("modal")) {
+      closeModal(bigPictureModal);
+    }
+  });
+  if (
+    evt.target === evt.currentTarget ||
+    evt.target.classList.contains("modal__close")
+  ) {
+    closeModal(evt.target);
+  }
 }
-//Clicking the outside overlay to remove modal
-profileEditModal.addEventListener("click", (e) => {
-  if (e.target.classList.contains("modal")) {
-    closeModal(profileEditModal);
-  }
-});
 
-cardAddModal.addEventListener("click", (e) => {
-  if (e.target.classList.contains("modal")) {
-    closeModal(cardAddModal);
-  }
-});
-
-bigPictureModal.addEventListener("click", (e) => {
-  if (e.target.classList.contains("modal")) {
-    closeModal(bigPictureModal);
-  }
-});
+profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
+cardAddModal.addEventListener("mousedown", closeModalOnRemoteClick);
+bigPictureModal.addEventListener("mousedown", closeModalOnRemoteClick);

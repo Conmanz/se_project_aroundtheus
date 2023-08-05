@@ -147,10 +147,13 @@
   cursor: default;
 }
 
-.modal__button_disabled:hover {
+.modal__button_disabled {
   background-color: transparent;
   color: #5e5e5e;
   border: 1px solid #5e5e5e;
+}
+
+.modal__button_disabled:hover {
   opacity: 1;
   cursor: default;
 }
