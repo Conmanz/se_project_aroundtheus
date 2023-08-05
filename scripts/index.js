@@ -61,20 +61,12 @@ function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keyup", handleEscape);
 }
-//Can you explain a little more for (isModalOpen(profileEditModal)) because this was what the tutor sent me?
+
 function handleEscape({ key }) {
   if (key === "Escape") {
-    if (isModalOpen(profileEditModal)) {
-      closeModal(profileEditModal);
-    }
-
-    if (isModalOpen(cardAddModal)) {
-      closeModal(cardAddModal);
-    }
-
-    if (isModalOpen(bigPictureModal)) {
-      closeModal(bigPictureModal);
-    }
+    const openModal = document.querySelector(".modal_opened");
+    closeModal(openModal);
+    console.log("clicked");
   }
 }
 
