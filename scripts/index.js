@@ -54,12 +54,28 @@ const bigPictureFooter = document.querySelector(".modal__image_footer");
 //Fuctions
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  const modalContainer = modal.querySelector("div.modal > div");
+  document.addEventListener("keyup", handleEscape);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  const modalContainer = modal.querySelector("div.modal > div");
+  document.removeEventListener("keyup", handleEscape);
+}
+//Can you explain a little more for (isModalOpen(profileEditModal)) because this was what the tutor sent me?
+function handleEscape({ key }) {
+  if (key === "Escape") {
+    if (isModalOpen(profileEditModal)) {
+      closeModal(profileEditModal);
+    }
+
+    if (isModalOpen(cardAddModal)) {
+      closeModal(cardAddModal);
+    }
+
+    if (isModalOpen(bigPictureModal)) {
+      closeModal(bigPictureModal);
+    }
+  }
 }
 
 function isModalOpen(modal) {
@@ -77,11 +93,7 @@ function getCardElement(cardData) {
 
   // Handles clicking the heart button on each card
   cardLikeButton.addEventListener("click", () => {
-    if (cardLikeButton.classList.contains("card__liked-heart")) {
-      cardLikeButton.classList.remove("card__liked-heart");
-    } else {
-      cardLikeButton.classList.add("card__liked-heart");
-    }
+    cardLikeButton.classList.toggle("card__liked-heart");
   });
   const cardTrashButton = cardElement.querySelector(".card__delete-button");
 
@@ -157,44 +169,25 @@ bigPictureCloseButton.addEventListener("click", (e) => {
   closeModal(bigPictureModal);
 });
 
-document.addEventListener("keydown", ({ key }) => {
-  if (key === "Escape") {
-    if (isModalOpen(profileEditModal)) {
-      closeModal(profileEditModal);
-    }
-
-    if (isModalOpen(cardAddModal)) {
-      closeModal(cardAddModal);
-    }
-
-    if (isModalOpen(bigPictureModal)) {
-      closeModal(bigPictureModal);
-    }
-  }
-});
-
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keyup", handleEscape);
 }
-
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener("keyup", handleEscape);
-}
-
-function handleEscape({ key }) {
-  if (key === "Escape") {
-    if (isModalOpen(profileEditModal)) {
-      closeModal(profileEditModal);
-    }
-
-    if (isModalOpen(cardAddModal)) {
-      closeModal(cardAddModal);
-    }
-
-    if (isModalOpen(bigPictureModal)) {
-      closeModal(bigPictureModal);
-    }
+//Clicking the outside overlay to remove modal
+profileEditModal.addEventListener("click", (e) => {
+  if (e.target.classList.contains("modal")) {
+    closeModal(profileEditModal);
   }
-}
+});
+
+cardAddModal.addEventListener("click", (e) => {
+  if (e.target.classList.contains("modal")) {
+    closeModal(cardAddModal);
+  }
+});
+
+bigPictureModal.addEventListener("click", (e) => {
+  if (e.target.classList.contains("modal")) {
+    closeModal(bigPictureModal);
+  }
+});
