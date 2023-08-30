@@ -1,24 +1,18 @@
 export function openModal(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keyup", escEvent);
+  document.addEventListener("keyup", handleEscape);
 }
 
-export function escEvent(evt) {
-  evt.preventDefault();
-  if (evt.key === "Escape") {
-    const modals = document.querySelectorAll(".modal");
-    modals.forEach((modal) => {
-      const openedModal = modal.classList.contains("modal_opened");
-      if (openedModal) {
-        closePopup(modal);
-      }
-    });
+function handleEscape({ key }) {
+  if (key === "Escape") {
+    const openModal = document.querySelector(".modal_opened");
+    closeModal(openModal);
   }
 }
 
 export function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  document.removeEventListener("keyup", escEvent);
+  document.removeEventListener("keyup", handleEscape);
 }
 
 export function handleOverlay(evt) {

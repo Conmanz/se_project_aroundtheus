@@ -61,6 +61,10 @@ export default class FormValidator {
 
   // either disable state of button or reset form validation
   handleFormSubmitSuccess() {
+    const { submitButtonSelector, inactiveButtonClass } = this.#settings;
     this.#formElement.reset();
+    const submitButton = this.#formElement.querySelector(submitButtonSelector);
+    submitButton.classList.add(inactiveButtonClass);
+    submitButton.disabled = true;
   }
 }
