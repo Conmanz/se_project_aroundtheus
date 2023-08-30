@@ -10,26 +10,14 @@
   <body class="page">
     <div class="page__content">
       <header class="header page__section">
-        <img
-          class="header__image"
-          src="./images/logo.svg"
-          alt="Around the U.S. logo"
-        />
+        <img class="header__image" src="./images/logo.svg" alt="Around the U.S. logo" />
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="./images/jacques-cousteau.jpg"
-            alt="Avatar"
-            class="profile__image"
-          />
+          <img src="./images/jacques-cousteau.jpg" alt="Avatar" class="profile__image" />
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
-            <button
-              type="button"
-              class="profile__edit-button"
-              id="profile__edit-button"
-            ></button>
+            <button type="button" class="profile__edit-button" id="profile__edit-button"></button>
             <p class="profile__description">Explorer</p>
           </div>
           <button type="button" class="profile__plus-button"></button>
@@ -69,10 +57,7 @@
             maxlength="200"
             required
           />
-          <span
-            class="modal__error"
-            id="profile-description-input-error"
-          ></span>
+          <span class="modal__error" id="profile-description-input-error"></span>
           <button class="modal__button" type="submit">Save</button>
         </form>
       </div>
@@ -80,11 +65,7 @@
 
     <div class="modal" id="card-add-modal">
       <div class="modal__container">
-        <button
-          type="button"
-          class="modal__close"
-          id="add-modal__close"
-        ></button>
+        <button type="button" class="modal__close" id="add-modal__close"></button>
         <h3 class="modal__heading">New Place</h3>
         <form class="modal__form">
           <input
@@ -107,24 +88,14 @@
             required
           />
           <span class="modal__error" id="card-description-input-error"></span>
-          <button
-            class="modal__button modal__button_disabled"
-            type="submit"
-            disabled
-          >
-            Save
-          </button>
+          <button class="modal__button modal__button_disabled" type="submit" disabled>Save</button>
         </form>
       </div>
     </div>
 
     <div class="modal" id="image-modal">
       <div class="modal__image modal__image_container">
-        <button
-          type="button"
-          class="modal__close"
-          id="big-picture-modal__close"
-        ></button>
+        <button type="button" class="modal__close" id="big-picture-modal__close"></button>
         <img class="big-picture-img" src="#" alt="#" />
         <h3 class="modal__image modal__image_footer"></h3>
       </div>
@@ -140,7 +111,8 @@
         </div>
       </li>
     </template>
-    <script src="./scripts/index.js" defer></script>
-    <script src="./scripts/validation.js" defer></script>
+    <script type="module" src="./pages/index.js" defer></script>
+    <!-- <script src="./components/Card.js" defer></script> -->
+    <!-- <script src="./components/FormValidator.js" defer></script> -->
   </body>
 </html>
