@@ -5,6 +5,12 @@ export default class Card {
   #link;
   #cardTemplateSelector;
   #cardElement;
+  #cardLikeButton;
+  #cardDeleteButton;
+  #cardImageEl;
+  #cardTitleEl;
+  #bigPictureImg;
+  #bigPictureFooter;
 
   constructor({ name, link }, cardTemplateSelector) {
     this.#name = name;
@@ -13,48 +19,50 @@ export default class Card {
   }
 
   #setEventListeners() {
-    this.#cardElement.querySelector(".card__like-button").addEventListener("click", () => {
+    this.#cardLikeButton = this.#cardElement.querySelector(".card__like-button");
+    this.#cardDeleteButton = this.#cardElement.querySelector(".card__delete-button");
+
+    this.#cardLikeButton.addEventListener("click", () => {
       this.#handleLikeIcon();
     });
-
-    this.#cardElement.querySelector(".card__delete-button").addEventListener("click", () => {
+    this.#cardDeleteButton.addEventListener("click", () => {
       this.#handleDeleteIcon();
+    });
+
+    this.#cardImageEl.addEventListener("click", () => {
+      const bigPictureModal = document.querySelector("#image-modal");
+      this.#bigPictureImg.src = this.#link;
+      this.#bigPictureImg.alt = this.#name;
+      this.#bigPictureFooter.textContent = this.#name;
+      openModal(bigPictureModal);
     });
   }
 
   #handleLikeIcon() {
-    this.#cardElement.querySelector(".card__like-button").classList.toggle("card__liked-heart");
+    this.#cardLikeButton.classList.toggle("card__liked-heart");
   }
 
   #handleDeleteIcon() {
     this.#cardElement.remove();
-    this.#cardElement = undefined;
+    this.#cardElement = null;
   }
 
   getCardElement() {
     const cardTemplate = document.querySelector(this.#cardTemplateSelector).content.firstElementChild;
     this.#cardElement = cardTemplate.cloneNode(true);
-    const cardImageEl = this.#cardElement.querySelector(".card__image");
-    const cardTitleEl = this.#cardElement.querySelector(".card__label-title");
-    cardImageEl.src = this.#link;
-    cardImageEl.alt = this.#name;
-    cardTitleEl.textContent = this.#name;
+    this.#cardImageEl = this.#cardElement.querySelector(".card__image");
+    this.#cardTitleEl = this.#cardElement.querySelector(".card__label-title");
+    this.#cardImageEl.src = this.#link;
+    this.#cardImageEl.alt = this.#name;
+    this.#cardTitleEl.textContent = this.#name;
+
+    this.#bigPictureFooter = document.querySelector(".modal__image_footer");
+    this.#bigPictureImg = document.querySelector(".big-picture-img");
+    this.#bigPictureImg.src = this.#link;
+    this.#bigPictureImg.alt = this.#name;
+    this.#bigPictureFooter.textContent = this.#name;
 
     this.#setEventListeners();
-
-    const bigPictureModal = document.querySelector("#image-modal");
-    const bigPictureFooter = document.querySelector(".modal__image_footer");
-    const bigPictureImg = document.querySelector(".big-picture-img");
-    bigPictureImg.src = this.#link;
-    bigPictureImg.alt = this.#name;
-    bigPictureFooter.textContent = this.#name;
-
-    cardImageEl.addEventListener("click", () => {
-      bigPictureImg.src = this.#link;
-      bigPictureImg.alt = this.#name;
-      bigPictureFooter.textContent = this.#name;
-      openModal(bigPictureModal);
-    });
 
     return this.#cardElement;
   }

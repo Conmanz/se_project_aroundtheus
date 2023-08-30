@@ -1,6 +1,7 @@
 export default class FormValidator {
   #settings;
   #formElement;
+  #submitButton;
 
   constructor(settings, formElement) {
     this.#settings = settings;
@@ -22,17 +23,22 @@ export default class FormValidator {
     }
   }
 
+  #disableButton() {
+    this.#submitButton.classList.add(this.#settings.inactiveButtonClass);
+    this.#submitButton.disabled = true;
+  }
+
+  #enableButton() {
+    this.#submitButton.classList.remove(this.#settings.inactiveButtonClass);
+    this.#submitButton.disabled = false;
+  }
+
   // toggle submit button state
   #toggleButtonState(inputEls) {
-    const { inactiveButtonClass, submitButtonSelector } = this.#settings;
-    const submitButton = this.#formElement.querySelector(submitButtonSelector);
-
     if (!inputEls.every((inputEl) => inputEl.validity.valid)) {
-      submitButton.classList.add(inactiveButtonClass);
-      submitButton.disabled = true;
+      this.#disableButton();
     } else {
-      submitButton.classList.remove(inactiveButtonClass);
-      submitButton.disabled = false;
+      this.#enableButton();
     }
   }
 
@@ -55,16 +61,16 @@ export default class FormValidator {
   }
 
   // enables form validation
+  // submitHandler is needed here to not have submit event listeners in index.js. If having a submit
+  // listener in index.js is okay, please let me know
   enableValidation(submitHandler) {
+    this.#submitButton = this.#formElement.querySelector(this.#settings.submitButtonSelector);
     this.#setEventListeners(submitHandler);
   }
 
   // either disable state of button or reset form validation
   handleFormSubmitSuccess() {
-    const { submitButtonSelector, inactiveButtonClass } = this.#settings;
     this.#formElement.reset();
-    const submitButton = this.#formElement.querySelector(submitButtonSelector);
-    submitButton.classList.add(inactiveButtonClass);
-    submitButton.disabled = true;
+    this.#disableButton();
   }
 }
