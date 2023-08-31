@@ -82,11 +82,17 @@ cardAddButton.addEventListener("click", () => {
   openModal(cardAddModal);
 });
 
+cardAddForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  addNewCard();
+  cardAddFormValidator.handleFormSubmitSuccess();
+});
+
 cardAddCloseButton.addEventListener("click", (e) => closeModal(cardAddModal));
 
 bigPictureCloseButton.addEventListener("click", () => closeModal(bigPictureModal));
 
-cardAddFormValidator.enableValidation(addNewCard);
+cardAddFormValidator.enableValidation();
 
 /* Profile Functions */
 function handleProfileEditSubmit() {
@@ -102,13 +108,23 @@ profileEditButton.addEventListener("click", () => {
   openModal(profileEditModal);
 });
 
+profileEditForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  handleProfileEditSubmit();
+  profileEditFormValidator.handleFormSubmitSuccess();
+});
+
 profileEditCloseButton.addEventListener("click", () => closeModal(profileEditModal));
 
-profileEditFormValidator.enableValidation(handleProfileEditSubmit);
+profileEditFormValidator.enableValidation();
 
 initialCards.forEach((cardData) => {
+  // This is where the card is created
   const card = new Card(cardData, cardTemplateSelector);
-  cardListEL.append(card.getCardElement());
+  // The newly created card's elements to be added to the DOM
+  const cardElement = card.getCardElement();
+  // This is where the card element gets added to the DOM
+  cardListEL.append(cardElement);
 });
 
 profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);

@@ -43,13 +43,7 @@ export default class FormValidator {
   }
 
   // set event handlers
-  #setEventListeners(submitHandler) {
-    this.#formElement.addEventListener("submit", (e) => {
-      e.preventDefault();
-      submitHandler();
-      this.handleFormSubmitSuccess();
-    });
-
+  #setEventListeners() {
     const { inputSelector } = this.#settings;
     const inputEls = [...this.#formElement.querySelectorAll(inputSelector)];
     inputEls.forEach((inputEl) => {
@@ -61,11 +55,9 @@ export default class FormValidator {
   }
 
   // enables form validation
-  // submitHandler is needed here to not have submit event listeners in index.js. If having a submit
-  // listener in index.js is okay, please let me know
-  enableValidation(submitHandler) {
+  enableValidation() {
     this.#submitButton = this.#formElement.querySelector(this.#settings.submitButtonSelector);
-    this.#setEventListeners(submitHandler);
+    this.#setEventListeners();
   }
 
   // either disable state of button or reset form validation
