@@ -64,15 +64,17 @@ const cardAddFormValidator = new FormValidator(settings, cardAddForm);
 
 /* Card Functions */
 function addNewCard() {
-  const card = new Card(
-    {
-      name: addCardTitleInput.value,
-      link: addCardImageURL.value,
-    },
-    cardTemplateSelector
-  );
-  cardListEL.prepend(card.getCardElement());
+  const cardData = {
+    name: addCardTitleInput.value,
+    link: addCardImageURL.value,
+  };
+  cardListEL.prepend(createCard(cardData));
   closeModal(cardAddModal);
+}
+
+function createCard(cardData) {
+  const card = new Card(cardData, cardTemplateSelector);
+  return card.getCardElement();
 }
 
 /* Card Event Listeners */
@@ -119,12 +121,7 @@ profileEditCloseButton.addEventListener("click", () => closeModal(profileEditMod
 profileEditFormValidator.enableValidation();
 
 initialCards.forEach((cardData) => {
-  // This is where the card is created
-  const card = new Card(cardData, cardTemplateSelector);
-  // The newly created card's elements to be added to the DOM
-  const cardElement = card.getCardElement();
-  // This is where the card element gets added to the DOM
-  cardListEL.append(cardElement);
+  cardListEL.append(createCard(cardData));
 });
 
 profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
