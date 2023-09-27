@@ -1,4 +1,4 @@
-import { openModal } from "../utils/utils.js";
+import { openModal } from "../scripts/utils.js";
 
 export default class Card {
   #name;
