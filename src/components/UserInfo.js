@@ -3,6 +3,7 @@ export default class UserInfo {
     this._nameElement = document.querySelector(userNameSelector);
     this._descriptionElement = document.querySelector(descriptionNameSelector);
   }
+
   getUserInfo() {
     const userInput = {
       name: this._nameElement.textContent,

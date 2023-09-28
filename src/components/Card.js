@@ -1,4 +1,4 @@
-import { openModal } from "../scripts/utils.js";
+import PopupWithImage from "./PopupWithImage";
 
 export default class Card {
   #name;
@@ -30,11 +30,11 @@ export default class Card {
     });
 
     this.#cardImageEl.addEventListener("click", () => {
-      const bigPictureModal = document.querySelector("#image-modal");
-      this.#bigPictureImg.src = this.#link;
-      this.#bigPictureImg.alt = this.#name;
-      this.#bigPictureFooter.textContent = this.#name;
-      openModal(bigPictureModal);
+      const bigPicturePopup = new PopupWithImage({ popupSelector: "#image-modal" });
+      bigPicturePopup.open({
+        link: this.#link,
+        name: this.#name,
+      });
     });
   }
 
