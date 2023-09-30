@@ -1,5 +1,3 @@
-import PopupWithImage from "./PopupWithImage";
-
 export default class Card {
   #name;
   #link;
@@ -9,13 +7,13 @@ export default class Card {
   #cardDeleteButton;
   #cardImageEl;
   #cardTitleEl;
-  #bigPictureImg;
-  #bigPictureFooter;
+  #handleCardClick;
 
-  constructor({ name, link }, cardTemplateSelector) {
+  constructor({ name, link }, cardTemplateSelector, handleCardClick) {
     this.#name = name;
     this.#link = link;
     this.#cardTemplateSelector = cardTemplateSelector;
+    this.#handleCardClick = handleCardClick;
   }
 
   #setEventListeners() {
@@ -30,11 +28,7 @@ export default class Card {
     });
 
     this.#cardImageEl.addEventListener("click", () => {
-      const bigPicturePopup = new PopupWithImage({ popupSelector: "#image-modal" });
-      bigPicturePopup.open({
-        link: this.#link,
-        name: this.#name,
-      });
+      this.#handleCardClick(this.#link, this.#name);
     });
   }
 
@@ -55,12 +49,6 @@ export default class Card {
     this.#cardImageEl.src = this.#link;
     this.#cardImageEl.alt = this.#name;
     this.#cardTitleEl.textContent = this.#name;
-
-    this.#bigPictureFooter = document.querySelector(".modal__image_footer");
-    this.#bigPictureImg = document.querySelector(".big-picture-img");
-    this.#bigPictureImg.src = this.#link;
-    this.#bigPictureImg.alt = this.#name;
-    this.#bigPictureFooter.textContent = this.#name;
 
     this.#setEventListeners();
 

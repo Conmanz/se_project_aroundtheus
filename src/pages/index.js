@@ -1,36 +1,11 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
+import { initialCards } from "../utils/constants.js";
 import "../pages/index.css";
-
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-];
 
 const settings = {
   formSelector: ".modal__form",
@@ -42,17 +17,35 @@ const settings = {
 };
 
 //Elements
-const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileEditForm = profileEditModal.querySelector(".modal__form");
-const profileEditFormValidator = new FormValidator(settings, profileEditForm);
-
 const profileEditButton = document.querySelector("#profile__edit-button");
-const cardListEL = document.querySelector(".cards__list");
 const cardAddButton = document.querySelector(".profile__plus-button");
 
-const cardAddModal = document.querySelector("#card-add-modal");
-const cardAddForm = cardAddModal.querySelector(".modal__form");
-const cardAddFormValidator = new FormValidator(settings, cardAddForm);
+// Used to store our form validators
+const formValidators = {};
+
+const createValidators = (config) => {
+  const forms = Array.from(document.querySelectorAll(config.formSelector));
+  forms.forEach((formElement) => {
+    // Create new instance of the validator for each form element
+    const validator = new FormValidator(config, formElement);
+
+    // Get the value of the 'name' attribute of the form element
+    const formName = formElement.getAttribute("name");
+
+    // Store the validator by the 'name' attribute of the form
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+/* Section Functions */
+const section = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => createCard(item),
+  },
+  ".cards__list"
+);
 
 /* Card Functions */
 const newCardPopup = new PopupWithForm({
@@ -61,13 +54,22 @@ const newCardPopup = new PopupWithForm({
 });
 
 function createCard(cardData) {
-  const card = new Card(cardData, "#card-template");
+  const card = new Card(cardData, "#card-template", handleCardClick);
   return card.getCardElement();
 }
 
 function handleCardFormSubmit(data) {
-  cardListEL.prepend(createCard(data));
-  cardAddFormValidator.handleFormSubmitSuccess();
+  section.addItem(createCard(data));
+  /*
+   * handleFormSubmitSuccess() is called when we close the form, because we are not submitting the form
+   * when we open the modal
+   */
+  formValidators["cardAddForm"].handleFormSubmitSuccess();
+}
+
+function handleCardClick(link, name) {
+  const bigPicturePopup = new PopupWithImage({ popupSelector: "#image-modal" });
+  bigPicturePopup.open({ link, name });
 }
 
 /* Card Event Listeners */
@@ -75,15 +77,17 @@ cardAddButton.addEventListener("click", () => {
   newCardPopup.open();
 });
 
-cardAddFormValidator.enableValidation();
-
 /* Profile Edit Functions */
 const userInfo = new UserInfo(".profile__title", ".profile__description");
 const profileEditPopupForm = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
   handleFormSubmit: (formData) => {
     userInfo.setUserInfo(formData);
-    profileEditFormValidator.handleFormSubmitSuccess();
+    /*
+     * handleFormSubmitSuccess() is called when we close the form, because we are not submitting the form
+     * when we open the modal
+     */
+    formValidators["profileEditForm"].handleFormSubmitSuccess();
   },
 });
 
@@ -93,18 +97,6 @@ profileEditButton.addEventListener("click", () => {
   profileEditPopupForm.open();
 });
 
-profileEditFormValidator.enableValidation();
+section.renderItems();
 
-/* Section Functions */
-const section = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const cardElement = createCard(item);
-    section.getView(cardElement);
-    return cardElement;
-  },
-});
-
-initialCards.forEach((cardData) => {
-  cardListEL.append(createCard(cardData));
-});
+createValidators(settings);
