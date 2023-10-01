@@ -58,7 +58,6 @@ function createCard(cardData) {
 
 function handleCardFormSubmit(data) {
   section.addItem(createCard(data));
-  formValidators["cardAddForm"].resetForm();
 }
 
 function handleCardClick(link, name) {
@@ -76,6 +75,11 @@ const profileEditPopupForm = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
   handleFormSubmit: (formData) => {
     userInfo.setUserInfo(formData);
+    /*
+     * Cannot move resetForm() into handleFormClose, because for the profile edit modal, we don't want to
+     * change the submit button's disabled state. The form is automatically filled with existing data, so
+     * the submit button should never be disabled when opening the modal
+     */
     formValidators["profileEditForm"].resetForm();
   },
   handleFormClose: () => {},
