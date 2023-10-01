@@ -3,10 +3,11 @@ import Popup from "./Popup.js";
 export default class PopupWithForm extends Popup {
   #inputElements;
 
-  constructor({ popupSelector, handleFormSubmit }) {
+  constructor({ popupSelector, handleFormSubmit, handleFormClose }) {
     super({ popupSelector });
     this._popupForm = this._popupElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
+    this._handleFormClose = handleFormClose;
     this._setEventListeners();
   }
 
@@ -21,7 +22,7 @@ export default class PopupWithForm extends Popup {
   }
 
   close() {
-    this._popupForm.reset();
+    this._handleFormClose();
     super.close();
   }
 

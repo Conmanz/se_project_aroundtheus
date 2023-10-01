@@ -1,6 +1,7 @@
 export default class FormValidator {
   #settings;
   #formElement;
+  #inputEls;
   #submitButton;
 
   constructor(settings, formElement) {
@@ -24,18 +25,28 @@ export default class FormValidator {
   }
 
   #disableButton() {
-    this.#submitButton.classList.add(this.#settings.inactiveButtonClass);
-    this.#submitButton.disabled = true;
+    if (!this.#submitButton.classList.contains(this.#settings.inactiveButtonClass)) {
+      this.#submitButton.classList.add(this.#settings.inactiveButtonClass);
+    }
+
+    if (!this.#submitButton.disabled) {
+      this.#submitButton.disabled = true;
+    }
   }
 
   #enableButton() {
-    this.#submitButton.classList.remove(this.#settings.inactiveButtonClass);
-    this.#submitButton.disabled = false;
+    if (this.#submitButton.classList.contains(this.#settings.inactiveButtonClass)) {
+      this.#submitButton.classList.remove(this.#settings.inactiveButtonClass);
+    }
+
+    if (this.#submitButton.disabled) {
+      this.#submitButton.disabled = false;
+    }
   }
 
   // toggle submit button state
-  #toggleButtonState(inputEls) {
-    if (!inputEls.every((inputEl) => inputEl.validity.valid)) {
+  #toggleButtonState() {
+    if (!this.#inputEls.every((inputEl) => inputEl.validity.valid)) {
       this.#disableButton();
     } else {
       this.#enableButton();
@@ -45,11 +56,11 @@ export default class FormValidator {
   // set event handlers
   #setEventListeners() {
     const { inputSelector } = this.#settings;
-    const inputEls = [...this.#formElement.querySelectorAll(inputSelector)];
-    inputEls.forEach((inputEl) => {
-      inputEl.addEventListener("input", (e) => {
-        this.#checkInputValidity(inputEl);
-        this.#toggleButtonState(inputEls);
+    this.#inputEls = [...this.#formElement.querySelectorAll(inputSelector)];
+    this.#inputEls.forEach((element) => {
+      element.addEventListener("input", (e) => {
+        this.#checkInputValidity(element);
+        this.#toggleButtonState();
       });
     });
   }
@@ -60,9 +71,8 @@ export default class FormValidator {
     this.#setEventListeners();
   }
 
-  // either disable state of button or reset form validation
-  handleFormSubmitSuccess() {
+  resetForm() {
     this.#formElement.reset();
-    this.#disableButton();
+    this.#toggleButtonState();
   }
 }

@@ -6,19 +6,12 @@ import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
 import { initialCards } from "../utils/constants.js";
 import "../pages/index.css";
-
-const settings = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
+import { settings } from "../utils/constants.js";
 
 //Elements
 const profileEditButton = document.querySelector("#profile__edit-button");
 const cardAddButton = document.querySelector(".profile__plus-button");
+const bigPicturePopup = new PopupWithImage({ popupSelector: "#image-modal" });
 
 // Used to store our form validators
 const formValidators = {};
@@ -38,6 +31,8 @@ const createValidators = (config) => {
   });
 };
 
+createValidators(settings);
+
 /* Section Functions */
 const section = new Section(
   {
@@ -51,6 +46,9 @@ const section = new Section(
 const newCardPopup = new PopupWithForm({
   popupSelector: "#card-add-modal",
   handleFormSubmit: handleCardFormSubmit,
+  handleFormClose: () => {
+    formValidators["cardAddForm"].resetForm();
+  },
 });
 
 function createCard(cardData) {
@@ -60,15 +58,10 @@ function createCard(cardData) {
 
 function handleCardFormSubmit(data) {
   section.addItem(createCard(data));
-  /*
-   * handleFormSubmitSuccess() is called when we close the form, because we are not submitting the form
-   * when we open the modal
-   */
-  formValidators["cardAddForm"].handleFormSubmitSuccess();
+  formValidators["cardAddForm"].resetForm();
 }
 
 function handleCardClick(link, name) {
-  const bigPicturePopup = new PopupWithImage({ popupSelector: "#image-modal" });
   bigPicturePopup.open({ link, name });
 }
 
@@ -83,12 +76,9 @@ const profileEditPopupForm = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
   handleFormSubmit: (formData) => {
     userInfo.setUserInfo(formData);
-    /*
-     * handleFormSubmitSuccess() is called when we close the form, because we are not submitting the form
-     * when we open the modal
-     */
-    formValidators["profileEditForm"].handleFormSubmitSuccess();
+    formValidators["profileEditForm"].resetForm();
   },
+  handleFormClose: () => {},
 });
 
 /* Profile Event Listeners */
@@ -98,5 +88,3 @@ profileEditButton.addEventListener("click", () => {
 });
 
 section.renderItems();
-
-createValidators(settings);
