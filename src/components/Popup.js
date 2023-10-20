@@ -1,5 +1,3 @@
-function eventHandler(popup, e) {}
-
 export default class Popup {
   /*
    * Property is needed in order to store event listener callback, as removeEventListener does not work

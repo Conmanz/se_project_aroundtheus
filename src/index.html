@@ -13,11 +13,12 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img src="<%=require('./images/jacques-cousteau.jpg')%>" alt="Avatar" class="profile__image" />
+          <img src="./images/Pencil.svg" alt="Pencil" class="profile-edit-image" />
+          <img src="" alt="Avatar" class="profile__image" id="avatar-profile__image" />
           <div class="profile__info">
-            <h1 class="profile__title">Jacques Cousteau</h1>
+            <h1 class="profile__title"></h1>
             <button type="button" class="profile__edit-button" id="profile__edit-button"></button>
-            <p class="profile__description">Explorer</p>
+            <p class="profile__description"></p>
           </div>
           <button type="button" class="profile__plus-button"></button>
         </section>
@@ -49,7 +50,7 @@
           <input
             class="modal__input modal__input_type_description"
             type="text"
-            name="description"
+            name="about"
             placeholder="Description"
             id="profile-description-input"
             minlength="2"
@@ -90,6 +91,32 @@
         <button type="button" class="modal__close" id="big-picture-modal__close"></button>
         <img class="big-picture-img" src="#" alt="#" />
         <h3 class="modal__image modal__image_footer"></h3>
+      </div>
+    </div>
+
+    <div class="modal" id="confirm-delete-modal">
+      <div class="modal__container" id="confirm-modal-container">
+        <button type="button" class="modal__close" id="confirm-modal__close"></button>
+        <h3 class="modal__heading" id="confirm-modal__heading">Are you sure?</h3>
+        <button id="confirm-yes-button" class="modal__button" type="submit">Yes</button>
+      </div>
+    </div>
+
+    <div class="modal" id="profile-edit-image">
+      <div class="modal__container" id="profile-image-container">
+        <button type="button" class="modal__close" id="profile-image-close"></button>
+        <h3 class="modal__heading" id="profile-modal__heading">Change profile picture</h3>
+        <input
+          class="modal__input modal__input_type_description"
+          type="text"
+          name="about"
+          placeholder="Link"
+          id="profile-change-input"
+          minlength="2"
+          maxlength="200"
+          required
+        />
+        <button id="profile-image-button" class="modal__button" type="submit">Save</button>
       </div>
     </div>
 
