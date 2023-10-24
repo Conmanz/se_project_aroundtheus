@@ -19,7 +19,8 @@ export default class Card {
   #handleCardDelete;
   #handleProfileChange;
   #profileImage;
-  #profileDeleteButton;
+  // #profileDeleteButton;
+  // #cardExitButton;
 
   constructor(
     { name, link, isLiked, owner, _id, createdAt },
@@ -29,8 +30,9 @@ export default class Card {
     handleCardDislike,
     handleCardDelete,
     handleProfileChange,
-    profileImage,
-    profileDeleteButton
+    profileImage
+    // profileDeleteButton,
+    // cardExitButton
   ) {
     this.#name = name;
     this.#link = link;
@@ -45,7 +47,8 @@ export default class Card {
     this.#handleCardDelete = handleCardDelete;
     this.#handleProfileChange = handleProfileChange;
     this.#profileImage = profileImage;
-    this.#profileDeleteButton = profileDeleteButton;
+    // this.#profileDeleteButton = profileDeleteButton;
+    // this.#cardExitButton = cardExitButton;
   }
 
   #setEventListeners() {
@@ -53,8 +56,9 @@ export default class Card {
     this.#cardDeleteConfirmModal = document.querySelector("#confirm-delete-modal");
     this.#cardDeleteConfirmModalButton = this.#cardDeleteConfirmModal.querySelector(".modal__button");
     this.#handleProfileChange = document.querySelector("#profile-edit-image");
-    this.#profileImage = document.querySelector(".profile__image");
-    this.#profileDeleteButton = this.#cardElement.querySelector("#profile-image-close");
+    this.#profileImage = document.querySelector(".profile-avatar__button");
+    // this.#cardExitButton = this.#cardElement.querySelector("#profile-image-close");
+    // this.#profileDeleteButton = this.#cardElement.querySelector("#profile-image-close");
 
     this.#cardLikeButton.addEventListener("click", () => {
       this.#handleClickLikeButton();
@@ -77,8 +81,12 @@ export default class Card {
       this.#handleProfileChange.classList.add("modal_opened");
     });
 
+    // this.#cardExitButton.addEventListener("click", () => {
+    //   this.#handleProfileChange.classList.remove("modal_opened");
+    // });
+
     // this.#profileDeleteButton.addEventListener("click", () => {
-    //   this.#profileImage.classList.remove("modal_opened");
+    //   this.#handleProfileChange.classList.remove("modal_opened");
     // });
   }
 
