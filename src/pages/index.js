@@ -4,7 +4,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
-import { initialCards } from "../utils/constants.js";
+// import { initialCards } from "../utils/constants.js";
 import "../pages/index.css";
 import { settings } from "../utils/constants.js";
 import { Api } from "../components/API.js";
@@ -19,6 +19,7 @@ const api = new Api({
 
 //Elements
 const profileEditButton = document.querySelector("#profile__edit-button");
+const profileAvatarImage = document.querySelector(".profile-avatar__button");
 const cardAddButton = document.querySelector(".profile__plus-button");
 const bigPicturePopup = new PopupWithImage({ popupSelector: "#image-modal" });
 
@@ -62,7 +63,7 @@ function createCard(cardData) {
 }
 
 function handleCardFormSubmit(data) {
-  api.createCard(data).then((res) => section.addItem(createCard(res)));
+  return api.createCard(data).then((res) => section.addItem(createCard(res)));
 }
 
 function handleCardClick(link, name) {
@@ -79,23 +80,35 @@ const userInfo = new UserInfo({});
 const profileEditPopupForm = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
   handleFormSubmit: (formData) => {
-    userInfo.setUserInfo(formData);
-    api.updateProfile(formData);
-
-    /*
-     * Cannot move resetForm() into handleFormClose, because for the profile edit modal, we don't want to
-     * change the submit button's disabled state. The form is automatically filled with existing data, so
-     * the submit button should never be disabled when opening the modal
-     */
-    formValidators["profileEditForm"].resetForm();
+    return api.updateProfile(formData).then((res) => {
+      userInfo.setUserInfo(res);
+      formValidators["profileEditForm"].resetForm();
+    });
   },
   handleFormClose: () => {},
+});
+
+const profileAvatarEditPopupForm = new PopupWithForm({
+  popupSelector: "#profile-avatar-edit-modal",
+  handleFormSubmit: ({ avatar }) => {
+    api.updateProfileAvatar(avatar).then((user) => {
+      userInfo.setUserInfo(user);
+    });
+  },
+  handleFormClose: () => {
+    formValidators["profileAvatarEditForm"].resetForm();
+  },
 });
 
 /* Profile Event Listeners */
 profileEditButton.addEventListener("click", () => {
   profileEditPopupForm.setInputValues(userInfo.getUserInfo());
   profileEditPopupForm.open();
+});
+
+profileAvatarImage.addEventListener("click", () => {
+  profileAvatarEditPopupForm.setInputValues(userInfo.getUserInfo());
+  profileAvatarEditPopupForm.open();
 });
 
 /* Section Functions */

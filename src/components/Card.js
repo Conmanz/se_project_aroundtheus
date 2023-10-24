@@ -17,10 +17,6 @@ export default class Card {
   #handleCardLike;
   #handleCardDislike;
   #handleCardDelete;
-  #handleProfileChange;
-  #profileImage;
-  // #profileDeleteButton;
-  // #cardExitButton;
 
   constructor(
     { name, link, isLiked, owner, _id, createdAt },
@@ -28,11 +24,7 @@ export default class Card {
     handleCardClick,
     handleCardLike,
     handleCardDislike,
-    handleCardDelete,
-    handleProfileChange,
-    profileImage
-    // profileDeleteButton,
-    // cardExitButton
+    handleCardDelete
   ) {
     this.#name = name;
     this.#link = link;
@@ -45,20 +37,12 @@ export default class Card {
     this.#handleCardLike = handleCardLike;
     this.#handleCardDislike = handleCardDislike;
     this.#handleCardDelete = handleCardDelete;
-    this.#handleProfileChange = handleProfileChange;
-    this.#profileImage = profileImage;
-    // this.#profileDeleteButton = profileDeleteButton;
-    // this.#cardExitButton = cardExitButton;
   }
 
   #setEventListeners() {
     this.#cardDeleteButton = this.#cardElement.querySelector(".card__delete-button");
     this.#cardDeleteConfirmModal = document.querySelector("#confirm-delete-modal");
     this.#cardDeleteConfirmModalButton = this.#cardDeleteConfirmModal.querySelector(".modal__button");
-    this.#handleProfileChange = document.querySelector("#profile-edit-image");
-    this.#profileImage = document.querySelector(".profile-avatar__button");
-    // this.#cardExitButton = this.#cardElement.querySelector("#profile-image-close");
-    // this.#profileDeleteButton = this.#cardElement.querySelector("#profile-image-close");
 
     this.#cardLikeButton.addEventListener("click", () => {
       this.#handleClickLikeButton();
@@ -66,35 +50,22 @@ export default class Card {
 
     this.#cardDeleteButton.addEventListener("click", () => {
       this.#cardDeleteConfirmModal.classList.add("modal_opened");
+
+      this.#cardDeleteConfirmModalButton.addEventListener("click", () => {
+        this.#cardDeleteConfirmModal.classList.remove("modal_opened");
+        this.#handleClickDeleteButton();
+      });
     });
 
     this.#cardImageEl.addEventListener("click", () => {
       this.#handleCardClick(this.#link, this.#name);
     });
-
-    this.#cardDeleteConfirmModalButton.addEventListener("click", () => {
-      this.#cardDeleteConfirmModal.classList.remove("modal_opened");
-      this.#handleClickDeleteButton();
-    });
-
-    this.#profileImage.addEventListener("click", () => {
-      this.#handleProfileChange.classList.add("modal_opened");
-    });
-
-    // this.#cardExitButton.addEventListener("click", () => {
-    //   this.#handleProfileChange.classList.remove("modal_opened");
-    // });
-
-    // this.#profileDeleteButton.addEventListener("click", () => {
-    //   this.#handleProfileChange.classList.remove("modal_opened");
-    // });
   }
 
   #handleClickDeleteButton() {
     this.#cardElement.remove();
     this.#cardElement = null;
-    console.log("DELETE SHOULD HAPPEN HERE");
-    // this.#handleCardDelete(this.#cardId);
+    this.#handleCardDelete(this.#cardId);
   }
 
   #handleClickLikeButton() {

@@ -62,7 +62,7 @@ export class Api {
       method: "DELETE",
       headers: this._headers,
     })
-      .then(console.log) // handle JSON response saying card was deleted/not deleted
+      .then((res) => res.json())
       .catch(console.error);
   }
 
@@ -90,14 +90,4 @@ export class Api {
   getAllData() {
     return Promise.all([this.getUserInfo(), this.getInitialCards()]);
   }
-
-  // other methods for working with the API
 }
-
-// const api = new Api({
-//   baseUrl: "https://around-api.en.tripleten-services.com/v1",
-//   headers: {
-//     authorization: "82c856c8-7f8e-41ef-95ad-77b3d762e208",
-//     "Content-Type": "application/json",
-//   },
-// });

@@ -14,7 +14,7 @@
       <main class="content">
         <section class="profile page__section">
           <div class="profile-avatar__container">
-            <img src="" alt="Avatar" class="profile__image" id="avatar-profile__image" />
+            <img src="" alt="Avatar" class="profile__image" id="profile-avatar__image" />
             <button type="button" class="profile-avatar__button"></button>
           </div>
           <div class="profile__info">
@@ -104,21 +104,24 @@
       </div>
     </div>
 
-    <div class="modal" id="profile-edit-image">
-      <div class="modal__container" id="profile-image-container">
-        <button type="button" class="modal__close" id="profile-image-close"></button>
-        <h3 class="modal__heading" id="profile-modal__heading">Change profile picture</h3>
-        <input
-          class="modal__input modal__input_type_description"
-          type="text"
-          name="about"
-          placeholder="Link"
-          id="profile-change-input"
-          minlength="2"
-          maxlength="200"
-          required
-        />
-        <button id="profile-image-button" class="modal__button" type="submit">Save</button>
+    <div class="modal" id="profile-avatar-edit-modal">
+      <div class="modal__container" id="profile-avatar-edit-modal-container">
+        <button type="button" class="modal__close" id="profile-avatar-edit-modal__close"></button>
+        <h3 class="modal__heading" id="profile-avatar-edit-modal__headingg">Change profile picture</h3>
+        <form class="modal__form" name="profileAvatarEditForm">
+          <input
+            class="modal__input modal__input_type_description"
+            type="text"
+            name="avatar"
+            placeholder="Image URL"
+            id="profile-avatar-input"
+            minlength="2"
+            maxlength="200"
+            required
+          />
+          <span class="modal__error" id="profile-avatar-input-error"></span>
+          <button id="profile-avatar-edit-button" class="modal__button" type="submit">Save</button>
+        </form>
       </div>
     </div>
 
