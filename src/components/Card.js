@@ -9,19 +9,20 @@ export default class Card {
   #cardElement;
   #cardLikeButton;
   #cardDeleteButton;
-  #cardDeleteConfirmModal;
-  #cardDeleteConfirmModalButton;
   #cardImageEl;
   #cardTitleEl;
   #handleCardClick;
   #handleCardLike;
   #handleCardDislike;
   #handleCardDelete;
+  #handleClickDeleteButton;
+  #confirmDeletePopup;
 
   constructor(
     { name, link, isLiked, owner, _id, createdAt },
     cardTemplateSelector,
     handleCardClick,
+    confirmDeletePopup,
     handleCardLike,
     handleCardDislike,
     handleCardDelete
@@ -37,24 +38,21 @@ export default class Card {
     this.#handleCardLike = handleCardLike;
     this.#handleCardDislike = handleCardDislike;
     this.#handleCardDelete = handleCardDelete;
+    this.#confirmDeletePopup = confirmDeletePopup;
+
+    this.#handleClickDeleteButton = this._handleClickDeleteButton.bind(this);
   }
 
   #setEventListeners() {
     this.#cardDeleteButton = this.#cardElement.querySelector(".card__delete-button");
-    this.#cardDeleteConfirmModal = document.querySelector("#confirm-delete-modal");
-    this.#cardDeleteConfirmModalButton = this.#cardDeleteConfirmModal.querySelector(".modal__button");
 
     this.#cardLikeButton.addEventListener("click", () => {
       this.#handleClickLikeButton();
     });
 
     this.#cardDeleteButton.addEventListener("click", () => {
-      this.#cardDeleteConfirmModal.classList.add("modal_opened");
-
-      this.#cardDeleteConfirmModalButton.addEventListener("click", () => {
-        this.#cardDeleteConfirmModal.classList.remove("modal_opened");
-        this.#handleClickDeleteButton();
-      });
+      this.#confirmDeletePopup.setSubmitAction(this.#handleClickDeleteButton);
+      this.#confirmDeletePopup.open();
     });
 
     this.#cardImageEl.addEventListener("click", () => {
@@ -62,10 +60,11 @@ export default class Card {
     });
   }
 
-  #handleClickDeleteButton() {
-    this.#cardElement.remove();
-    this.#cardElement = null;
-    this.#handleCardDelete(this.#cardId);
+  _handleClickDeleteButton() {
+    this.#handleCardDelete(this.#cardId).then(() => {
+      this.#confirmDeletePopup.close();
+      this.#cardElement.remove();
+    });
   }
 
   #handleClickLikeButton() {

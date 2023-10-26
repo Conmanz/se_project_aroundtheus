@@ -180,13 +180,13 @@
   position: relative;
 }
 
-#confirm-modal-container {
+#confirm-delete-modal-container {
   display: flex;
   height: auto;
   width: 350px;
 }
 
-#confirm-modal__heading {
+#confirm-delete-modal__heading {
   margin-bottom: 20px;
 }
 
@@ -215,12 +215,12 @@
     height: 46px;
   }
 
-  #confirm-modal-container {
+  #confirm-delete-modal-container {
     display: flex;
     width: 225px;
   }
 
-  #confirm-modal__heading {
+  #confirm-delete-modal__heading {
     margin-bottom: -15px;
   }
 }
