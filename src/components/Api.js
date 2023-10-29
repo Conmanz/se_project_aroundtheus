@@ -8,9 +8,7 @@ export class Api {
   /*User routes*/
   //Get the current user's info
   getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, { headers: this._headers })
-      .then((res) => (res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)))
-      .catch(console.error);
+    return fetch(`${this._baseUrl}/users/me`, { headers: this._headers }).then(this._checkResponse);
   }
 
   //Update your profile information
@@ -19,9 +17,7 @@ export class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify(user),
-    })
-      .then((res) => res.json())
-      .catch(console.error);
+    }).then(this._checkResponse);
   }
 
   //Update avatar
@@ -30,9 +26,7 @@ export class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ avatar }),
-    })
-      .then((res) => (res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)))
-      .catch(console.error);
+    }).then(this._checkResponse);
   }
 
   /*Card routes*/
@@ -40,9 +34,7 @@ export class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    })
-      .then((res) => (res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)))
-      .catch(console.error);
+    }).then(this._checkResponse);
   }
 
   //Create a card
@@ -51,9 +43,7 @@ export class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({ name, link }),
-    })
-      .then((res) => res.json())
-      .catch(console.error);
+    }).then(this._checkResponse);
   }
 
   //Delete a card
@@ -61,9 +51,7 @@ export class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then((res) => res.json())
-      .catch(console.error);
+    }).then(this._checkResponse);
   }
 
   //Like a card
@@ -71,9 +59,7 @@ export class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
-    })
-      .then((res) => res.json())
-      .catch(console.error);
+    }).then(this._checkResponse);
   }
 
   //Dislike a card
@@ -81,13 +67,20 @@ export class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then((res) => res.json())
-      .catch(console.error);
+    }).then(this._checkResponse);
   }
 
   // Gets both user info and initial cards
   getAllData() {
     return Promise.all([this.getUserInfo(), this.getInitialCards()]);
+  }
+
+  //Checking any response from the server
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(`Error ${res.status}`);
+    }
   }
 }

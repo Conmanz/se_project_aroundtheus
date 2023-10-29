@@ -67,7 +67,10 @@ function createCard(cardData) {
 }
 
 function handleCardFormSubmit(data) {
-  return api.createCard(data).then((res) => section.addItem(createCard(res)));
+  return api
+    .createCard(data)
+    .then((res) => section.addItem(createCard(res)))
+    .catch(console.error);
 }
 
 function handleCardClick(link, name) {
@@ -80,14 +83,21 @@ cardAddButton.addEventListener("click", () => {
 });
 
 /* Profile Edit Functions */
-const userInfo = new UserInfo({});
+const userInfo = new UserInfo({
+  nameSelector: ".profile__title",
+  descriptionSelector: ".profile__description",
+  avatarSelector: ".profile__image",
+});
 const profileEditPopupForm = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
   handleFormSubmit: (formData) => {
-    return api.updateProfile(formData).then((res) => {
-      userInfo.setUserInfo(res);
-      formValidators["profileEditForm"].resetForm();
-    });
+    return api
+      .updateProfile(formData)
+      .then((res) => {
+        userInfo.setUserInfo(res);
+        formValidators["profileEditForm"].resetForm();
+      })
+      .catch(console.error);
   },
   handleFormClose: () => {},
 });
@@ -95,9 +105,7 @@ const profileEditPopupForm = new PopupWithForm({
 const profileAvatarEditPopupForm = new PopupWithForm({
   popupSelector: "#profile-avatar-edit-modal",
   handleFormSubmit: ({ avatar }) => {
-    return api.updateProfileAvatar(avatar).then((user) => {
-      userInfo.setUserInfo(user);
-    });
+    return api.updateProfileAvatar(avatar).then(userInfo.setUserInfo).catch(console.error);
   },
   handleFormClose: () => {
     formValidators["profileAvatarEditForm"].resetForm();
@@ -124,21 +132,19 @@ const section = new Section(
   ".cards__list"
 );
 
-api.getAllData().then((res) => {
-  const user = res[0];
+api
+  .getAllData()
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo(userData);
+    cards.forEach((card) => {
+      // Create new card element to render
+      const cardElement = createCard(card);
 
-  // Set user info
-  userInfo.setUserInfo(user);
-
-  const cards = res[1].reverse();
-  cards.forEach((card) => {
-    // Create new card element to render
-    const cardElement = createCard(card);
-
-    // Add card element to card section to be displayed
-    section.addItem(cardElement);
-  });
-});
+      // Add card element to card section to be displayed
+      section.addItem(cardElement);
+    });
+    section.renderItems();
+  })
+  .catch(console.error);
 
 createValidators(settings);
-section.renderItems();

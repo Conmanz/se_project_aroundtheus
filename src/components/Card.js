@@ -61,23 +61,29 @@ export default class Card {
   }
 
   _handleClickDeleteButton() {
-    this.#handleCardDelete(this.#cardId).then(() => {
-      this.#confirmDeletePopup.close();
-      this.#cardElement.remove();
-    });
+    this.#handleCardDelete(this.#cardId)
+      .then(() => {
+        this.#confirmDeletePopup.close();
+        this.#cardElement.remove();
+      })
+      .catch(console.error);
   }
 
   #handleClickLikeButton() {
     if (this.#isLiked) {
-      this.#handleCardDislike(this.#cardId).then(() => {
-        this.#isLiked = !this.#isLiked;
-      });
-      this.#cardLikeButton.classList.remove("card__liked-heart");
+      this.#handleCardDislike(this.#cardId)
+        .then(() => {
+          this.#isLiked = !this.#isLiked;
+          this.#cardLikeButton.classList.remove("card__liked-heart");
+        })
+        .catch(console.error);
     } else {
-      this.#handleCardLike(this.#cardId).then(() => {
-        this.#isLiked = !this.#isLiked;
-      });
-      this.#cardLikeButton.classList.add("card__liked-heart");
+      this.#handleCardLike(this.#cardId)
+        .then(() => {
+          this.#isLiked = !this.#isLiked;
+          this.#cardLikeButton.classList.add("card__liked-heart");
+        })
+        .catch(console.error);
     }
   }
 

@@ -20,10 +20,12 @@ export default class PopupWithForm extends Popup {
       e.preventDefault();
       const originalText = this.#submitButton.textContent;
       this.#submitButton.textContent = "Saving...";
-      this._handleFormSubmit(this._getInputValues()).then(() => {
-        this.#submitButton.textContent = originalText;
-        this.close();
-      });
+      this._handleFormSubmit(this._getInputValues())
+        .then(() => {
+          this.close();
+        })
+        .catch(console.error)
+        .finally((this.#submitButton.textContent = originalText));
     });
   }
 
