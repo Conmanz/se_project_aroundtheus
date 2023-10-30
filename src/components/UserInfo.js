@@ -1,19 +1,41 @@
 export default class UserInfo {
-  constructor(userNameSelector, descriptionNameSelector) {
-    this._nameElement = document.querySelector(userNameSelector);
-    this._descriptionElement = document.querySelector(descriptionNameSelector);
+  #nameElement;
+  #descriptionElement;
+  #avatarElement;
+
+  constructor({ name, about, avatar, _id, nameSelector, descriptionSelector, avatarSelector }) {
+    this._name = name;
+    this._about = about;
+    this._avatar = avatar;
+    this._id = _id;
+    // this.#nameElement = document.querySelector(".profile__title");
+    this.#nameElement = document.querySelector(nameSelector);
+    // this.#descriptionElement = document.querySelector(".profile__description");
+    this.#descriptionElement = document.querySelector(descriptionSelector);
+    // this.#avatarElement = document.querySelector(".profile__image");
+    this.#avatarElement = document.querySelector(avatarSelector);
+
+    this.setUserInfo = this.setUserInfo.bind(this);
   }
 
   getUserInfo() {
     const userInput = {
-      name: this._nameElement.textContent,
-      description: this._descriptionElement.textContent,
+      name: this._name,
+      about: this._about,
+      avatar: this._avatar,
     };
     return userInput;
   }
 
-  setUserInfo(data) {
-    this._nameElement.textContent = data.name;
-    this._descriptionElement.textContent = data.description;
+  setUserInfo({ name, about, avatar }) {
+    this._name = name;
+    this.#nameElement.textContent = name;
+    this._about = about;
+    this.#descriptionElement.textContent = about;
+
+    if (avatar) {
+      this._avatar = avatar;
+      this.#avatarElement.src = avatar;
+    }
   }
 }

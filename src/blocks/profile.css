@@ -79,6 +79,39 @@
   margin-right: 24px;
 }
 
+#profile-avatar-edit-modal-container {
+  height: 215px;
+}
+
+#profile-avatar-edit-modal__headingg {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+#avatar-profile__image:hover {
+  opacity: 60%;
+  transition: 0.1s;
+}
+
+.profile-avatar__button {
+  background: transparent url(../images/Pencil.svg) center no-repeat;
+  height: 78%;
+  width: 16%;
+  border-radius: 50%;
+  border: none;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  transform: translate(-50%, -50%);
+  top: 59%;
+  left: 7%;
+}
+
+.profile-avatar__button:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+  cursor: pointer;
+}
 @media screen and (max-width: 1100px) {
   .profile {
     flex-direction: column;
@@ -103,6 +136,12 @@
   .profile__image {
     background-position: center;
     margin: 0;
+  }
+  .profile-avatar__button {
+    height: 126px;
+    width: 120px;
+    top: 39%;
+    left: 50%;
   }
 }
 
