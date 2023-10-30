@@ -136,13 +136,13 @@ api
   .getAllData()
   .then(([userData, cards]) => {
     userInfo.setUserInfo(userData);
-    cards.forEach((card) => {
-      // Create new card element to render
-      const cardElement = createCard(card);
+    // cards.forEach((card) => {
+    //   // Create new card element to render
+    //   const cardElement = createCard(card);
 
-      // Add card element to card section to be displayed
-      section.addItem(cardElement);
-    });
+    //   // Add card element to card section to be displayed
+    //   section.addItem(cardElement);
+    // });
     section.renderItems(cards);
   })
   .catch(console.error);
