@@ -143,7 +143,7 @@ api
       // Add card element to card section to be displayed
       section.addItem(cardElement);
     });
-    section.renderItems();
+    section.renderItems(cards);
   })
   .catch(console.error);
 

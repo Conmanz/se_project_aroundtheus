@@ -25,7 +25,9 @@ export default class PopupWithForm extends Popup {
           this.close();
         })
         .catch(console.error)
-        .finally((this.#submitButton.textContent = originalText));
+        .finally(() => {
+          this.#submitButton.textContent = originalText;
+        });
     });
   }
 
