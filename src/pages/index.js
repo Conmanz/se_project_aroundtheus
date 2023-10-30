@@ -123,27 +123,22 @@ profileAvatarImage.addEventListener("click", () => {
   profileAvatarEditPopupForm.open();
 });
 
-/* Section Functions */
-const section = new Section(
-  {
-    items: [], // Start with empty array to not render any cards
-    renderer: (item) => createCard(item),
-  },
-  ".cards__list"
-);
+let section;
 
 api
   .getAllData()
   .then(([userData, cards]) => {
     userInfo.setUserInfo(userData);
-    // cards.forEach((card) => {
-    //   // Create new card element to render
-    //   const cardElement = createCard(card);
 
-    //   // Add card element to card section to be displayed
-    //   section.addItem(cardElement);
-    // });
-    section.renderItems(cards);
+    /* Section Functions */
+    section = new Section(
+      {
+        items: cards,
+        renderer: (item) => createCard(item),
+      },
+      ".cards__list"
+    );
+    section.renderItems();
   })
   .catch(console.error);
 
